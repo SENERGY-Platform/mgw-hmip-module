@@ -17,7 +17,7 @@ hostResources:
 services:
   raspberrymatic:
     runConfig:
-      stopTimeout: 30
+      stopTimeout: 30s
     name: ccu
     image: ghcr.io/jens-maus/raspberrymatic:3.77.7.20240826
     httpEndpoints:
