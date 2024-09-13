@@ -20,10 +20,19 @@ services:
       stopTimeout: 30s
     name: ccu
     image: ghcr.io/jens-maus/raspberrymatic:3.77.7.20240826
+    ports: # Woraround for missing replacements for HTTP 302
+          - port: 80
+            hostPort: 8091
     httpEndpoints:
       - name: GUI
         port: 80
         extPath: "gui"
+        stringSub:
+          filters:
+            '/pages/': '{loc}/pages/' # This also needs to happen for a HTTP 302 to /pages
+            '/login.': '{loc}/login.'
+            '/webui/': '{loc}/webui/'
+            '/ise/': '{loc}/ise/'
 volumes:
   ccu_data:
     - mountPoint: /usr/local
